@@ -21,7 +21,7 @@ export class CarEntity {
   year: number;
 
   @Column()
-  kms: string;
+  kms: number;
 
   @Column()
   color: string;
@@ -29,10 +29,10 @@ export class CarEntity {
   @Column()
   passengers: number;
 
-  @Column({ type: 'float' })
+  @Column({ nullable: true, default: null, type: 'float' })
   price: number;
 
-  @Column()
+  @Column({ nullable: true, default: null })
   img: number;
 
   @CreateDateColumn()

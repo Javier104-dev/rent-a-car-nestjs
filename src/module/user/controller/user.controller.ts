@@ -30,8 +30,8 @@ export class UserController {
 
   @Post()
   async createUser(@Body() body: UserDto): Promise<UserEntity> {
-    const user = await this.userService.createUser(body);
-    return user;
+    const createdUser = await this.userService.createUser(body);
+    return createdUser;
   }
 
   @Put(':id')

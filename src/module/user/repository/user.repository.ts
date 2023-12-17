@@ -26,9 +26,9 @@ export class UserRepository {
   }
 
   async createUser(body: UserDto): Promise<UserEntity> {
-    const user = this.userEntity.create(body);
-    await this.userEntity.save(user);
-    return user;
+    const createdUser = this.userEntity.create(body);
+    await this.userEntity.save(createdUser);
+    return createdUser;
   }
 
   async updateUser(body: UpdateUserDto): Promise<UserEntity> {

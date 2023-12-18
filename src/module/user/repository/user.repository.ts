@@ -13,7 +13,8 @@ export class UserRepository {
   ) {}
 
   async getUsers(): Promise<UserEntity[]> {
-    return this.userEntity.find();
+    const users = await this.userEntity.find();
+    return users;
   }
 
   async getUser(id: number): Promise<UserEntity> {
@@ -38,10 +39,12 @@ export class UserRepository {
         `No se encontraron usuarios con id:${body.id}`,
       );
 
-    return this.userEntity.save(user);
+    const updatedUser = await this.userEntity.save(user);
+    return updatedUser;
   }
 
   async deleteUser(id: number): Promise<DeleteResult> {
-    return await this.userEntity.delete(id);
+    const car = await this.userEntity.delete(id);
+    return car;
   }
 }

@@ -47,9 +47,7 @@ export class UserController {
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<UserEntity> {
     const user = await this.userService.getUser(id);
-    if (user) {
-      await this.userService.deleteUser(id);
-      return user;
-    }
+    await this.userService.deleteUser(id);
+    return user;
   }
 }

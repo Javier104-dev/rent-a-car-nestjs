@@ -3,6 +3,7 @@ import { CarEntity } from '../entity/car.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CarDto } from '../dto/car.dto';
+import { UpdateCarDto } from '../dto/update.car.dto';
 
 @Injectable()
 export class CarRepository {
@@ -12,7 +13,8 @@ export class CarRepository {
   ) {}
 
   async getCars(): Promise<CarEntity[]> {
-    return this.carEntity.find();
+    const cars = await this.carEntity.find();
+    return cars;
   }
 
   async getCar(id: number): Promise<CarEntity> {
@@ -28,5 +30,22 @@ export class CarRepository {
     const createdCar = this.carEntity.create(body);
     await this.carEntity.save(createdCar);
     return createdCar;
+  }
+
+  async updateCar(body: UpdateCarDto): Promise<CarEntity> {
+    const car = await this.carEntity.preload(body);
+
+    if (!car)
+      throw new NotFoundException(
+        `No se encontraron autos con el id: ${body.id}`,
+      );
+
+    const updatedCar = await this.carEntity.save(body);
+    return updatedCar;
+  }
+
+  async deleteCar(id: number) {
+    const car = await this.carEntity.delete(id);
+    return car;
   }
 }

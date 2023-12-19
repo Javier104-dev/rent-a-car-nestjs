@@ -12,7 +12,7 @@ import { UserService } from '../service/user.service';
 import { UserDto } from '../dto/user.dto';
 import { UserEntity } from '../entity/user.entity';
 
-@Controller('/user')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

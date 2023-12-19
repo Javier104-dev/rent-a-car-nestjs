@@ -12,7 +12,7 @@ import { CarService } from '../service/car.service';
 import { CarEntity } from '../entity/car.entity';
 import { CarDto } from '../dto/car.dto';
 
-@Controller('/car')
+@Controller('car')
 export class CarController {
   constructor(private readonly carService: CarService) {}
 

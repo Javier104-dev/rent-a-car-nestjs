@@ -27,11 +27,11 @@ export class ReservationEntity {
 
   @ManyToOne(() => CarEntity, (car) => car.id)
   @JoinColumn({ name: 'car_id' })
-  car_id: CarEntity;
+  car: CarEntity;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
   @JoinColumn({ name: 'user_id' })
-  user_id: UserEntity;
+  user: UserEntity;
 
   @Column()
   created_at: Date;

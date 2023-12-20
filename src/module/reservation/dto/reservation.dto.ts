@@ -1,9 +1,4 @@
-import {
-  IsDateString,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-} from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class ReservationDto {
   @IsNotEmpty()
@@ -23,10 +18,10 @@ export class ReservationDto {
   total_price: number;
 
   @IsNumber()
-  @IsOptional()
+  @IsNotEmpty()
   car_id: number;
 
   @IsNumber()
-  @IsOptional()
+  @IsNotEmpty()
   user_id: number;
 }

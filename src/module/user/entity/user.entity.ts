@@ -29,7 +29,7 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ type: 'date' })
   birthdate: Date;
 
   @CreateDateColumn()

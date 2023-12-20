@@ -17,4 +17,9 @@ export class ReservationRepository {
     console.log(reservations);
     return reservations;
   }
+
+  async getReservation(id: number): Promise<ReservationEntity> {
+    const reservation = await this.reservationEntity.findOne({ where: { id } });
+    return reservation;
+  }
 }

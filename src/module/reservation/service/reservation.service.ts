@@ -9,4 +9,8 @@ export class ReservationService {
   async getReservations(): Promise<ReservationEntity[]> {
     return this.reservationRepository.getReservations();
   }
+
+  async getReservation(id: number): Promise<ReservationEntity> {
+    return this.reservationRepository.getReservation(id);
+  }
 }

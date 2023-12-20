@@ -1,4 +1,10 @@
-import { IsDateString, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 
 export class UpdateUserDto {
   @IsInt()
@@ -25,7 +31,7 @@ export class UpdateUserDto {
   @IsNotEmpty()
   phone_number: string;
 
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
   email: string;
 

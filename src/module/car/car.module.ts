@@ -9,6 +9,6 @@ import { CarRepository } from './repository/car.repository';
   imports: [TypeOrmModule.forFeature([CarEntity])],
   controllers: [CarController],
   providers: [CarService, CarRepository],
-  exports: [TypeOrmModule],
+  exports: [CarService],
 })
 export class CarModule {}

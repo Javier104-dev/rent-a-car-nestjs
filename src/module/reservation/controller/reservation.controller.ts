@@ -9,10 +9,16 @@ import {
 import { ReservationService } from '../service/reservation.service';
 import { ReservationEntity } from '../entity/reservation.entity';
 import { ReservationDto } from '../dto/reservation.dto';
+import { CarService } from 'src/module/car/service/car.service';
+import { UserService } from 'src/module/user/service/user.service';
 
 @Controller('reservation')
 export class ReservationController {
-  constructor(private readonly reservationService: ReservationService) {}
+  constructor(
+    private readonly reservationService: ReservationService,
+    private readonly carService: CarService,
+    private readonly userService: UserService,
+  ) {}
 
   @Get()
   async getReservations(): Promise<ReservationEntity[]> {
@@ -32,8 +38,15 @@ export class ReservationController {
   async createReservation(
     @Body() body: ReservationDto,
   ): Promise<ReservationEntity> {
-    console.log(body);
-    // const reservation = await this.createReservation(body);
-    return;
+    const car = await this.carService.getCar(body.car_id);
+    const user = await this.userService.getUser(body.user_id);
+    const nuevo = {
+      car,
+      user,
+      ...body,
+    };
+    console.log(nuevo);
+    const reservation = await this.reservationService.createReservation(nuevo);
+    return reservation;
   }
 }

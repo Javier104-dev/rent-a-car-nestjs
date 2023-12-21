@@ -2,6 +2,7 @@ import { CarEntity } from 'src/module/car/entity/car.entity';
 import { UserEntity } from 'src/module/user/entity/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -33,9 +34,9 @@ export class ReservationEntity {
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @CreateDateColumn()
   updated_at: Date;
 }

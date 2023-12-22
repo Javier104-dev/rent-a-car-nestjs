@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ReservationEntity } from '../entity/reservation.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ReservationDto } from '../dto/reservation.dto';
+import { Reservation } from '../model/entity/reservation';
 
 @Injectable()
 export class ReservationRepository {
@@ -15,7 +15,6 @@ export class ReservationRepository {
     const reservations = await this.reservationEntity.find({
       relations: ['car', 'user'],
     });
-    console.log(reservations);
     return reservations;
   }
 
@@ -27,7 +26,7 @@ export class ReservationRepository {
     return reservation;
   }
 
-  async createReservation(body: ReservationDto): Promise<ReservationEntity> {
+  async createReservation(body: Reservation): Promise<ReservationEntity> {
     const createdReservation = this.reservationEntity.create(body);
     await this.reservationEntity.save(createdReservation);
     return createdReservation;

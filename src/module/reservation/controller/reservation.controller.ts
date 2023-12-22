@@ -11,6 +11,7 @@ import { ReservationEntity } from '../entity/reservation.entity';
 import { ReservationDto } from '../dto/reservation.dto';
 import { CarService } from 'src/module/car/service/car.service';
 import { UserService } from 'src/module/user/service/user.service';
+import { formToEntity } from '../model/mapper/reservation.mapper';
 
 @Controller('reservation')
 export class ReservationController {
@@ -40,13 +41,12 @@ export class ReservationController {
   ): Promise<ReservationEntity> {
     const car = await this.carService.getCar(body.car_id);
     const user = await this.userService.getUser(body.user_id);
-    const nuevo = {
-      car,
-      user,
-      ...body,
-    };
-    console.log(nuevo);
-    const reservation = await this.reservationService.createReservation(nuevo);
-    return reservation;
+
+    const reservationBody = formToEntity(body, car, user);
+    // const reservation =
+    //   await this.reservationService.createReservation(reservationBody);
+    reservationBody.calculatePriceTotal();
+    console.log(reservationBody.totalPrice);
+    return;
   }
 }

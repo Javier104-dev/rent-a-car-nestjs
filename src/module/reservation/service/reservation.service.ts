@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ReservationRepository } from '../repository/reservation.repository';
 import { ReservationEntity } from '../entity/reservation.entity';
-import { ReservationDto } from '../dto/reservation.dto';
+import { Reservation } from '../model/entity/reservation';
 
 @Injectable()
 export class ReservationService {
@@ -15,7 +15,7 @@ export class ReservationService {
     return this.reservationRepository.getReservation(id);
   }
 
-  async createReservation(body: ReservationDto): Promise<ReservationEntity> {
+  async createReservation(body: Reservation): Promise<ReservationEntity> {
     return this.reservationRepository.createReservation(body);
   }
 }

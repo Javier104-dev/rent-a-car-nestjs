@@ -14,14 +14,14 @@ export class ReservationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  start_date: Date;
+  @Column({ name: 'start_date' })
+  startDate: Date;
 
-  @Column()
-  finish_date: Date;
+  @Column({ name: 'finish_date' })
+  finishDate: Date;
 
-  @Column({ type: 'float' })
-  price_per_day: number;
+  @Column({ name: 'price_per_day', type: 'float' })
+  pricePerDay: number;
 
   @Column({ type: 'float' })
   total_price: number;
@@ -34,9 +34,9 @@ export class ReservationEntity {
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  @CreateDateColumn()
-  updated_at: Date;
+  @CreateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

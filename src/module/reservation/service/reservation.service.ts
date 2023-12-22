@@ -15,7 +15,10 @@ export class ReservationService {
     return this.reservationRepository.getReservation(id);
   }
 
-  async createReservation(body: Reservation): Promise<ReservationEntity> {
-    return this.reservationRepository.createReservation(body);
+  async createReservation(
+    reservation: Reservation,
+  ): Promise<ReservationEntity> {
+    reservation.calculatePriceTotal();
+    return this.reservationRepository.createReservation(reservation);
   }
 }

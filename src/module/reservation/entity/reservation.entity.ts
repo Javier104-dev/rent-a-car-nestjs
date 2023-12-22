@@ -23,8 +23,8 @@ export class ReservationEntity {
   @Column({ name: 'price_per_day', type: 'float' })
   pricePerDay: number;
 
-  @Column({ type: 'float' })
-  total_price: number;
+  @Column({ name: 'total_price', type: 'float' })
+  totalPrice: number;
 
   @ManyToOne(() => CarEntity, (car) => car.id)
   @JoinColumn({ name: 'car_id' })

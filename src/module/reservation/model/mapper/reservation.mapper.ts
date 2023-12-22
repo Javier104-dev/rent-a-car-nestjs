@@ -8,7 +8,6 @@ export const formToEntity = (
     start_date: startDate,
     finish_date: finishDate,
     price_per_day: pricePerDay,
-    total_price: totalPrice,
   }: ReservationDto,
   car: CarEntity,
   user: UserEntity,
@@ -17,7 +16,6 @@ export const formToEntity = (
     new Date(startDate),
     new Date(finishDate),
     Number(pricePerDay),
-    Number(totalPrice),
     car,
     user,
   );

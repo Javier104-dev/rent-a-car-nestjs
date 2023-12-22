@@ -20,10 +20,6 @@ export class ReservationDto {
 
   @IsNumber()
   @IsNotEmpty()
-  total_price: number;
-
-  @IsNumber()
-  @IsNotEmpty()
   car_id: number;
 
   @IsNumber()

@@ -13,14 +13,12 @@ export class Reservation {
     startDate: Date,
     finishDate: Date,
     pricePerDay: number,
-    totalPrice: number,
     car: CarEntity,
     user: UserEntity,
   ) {
     this.startDate = startDate;
     this.finishDate = finishDate;
     this.pricePerDay = pricePerDay;
-    this.totalPrice = totalPrice;
     this.car = car;
     this.user = user;
   }

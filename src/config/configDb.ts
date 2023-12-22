@@ -11,6 +11,6 @@ export const configDb: TypeOrmModuleOptions = {
   password: '123456789',
   database: 'prueba',
   entities: [UserEntity, CarEntity, ReservationEntity],
-  logging: true,
+  // logging: true,
   // synchronize: true,
 };

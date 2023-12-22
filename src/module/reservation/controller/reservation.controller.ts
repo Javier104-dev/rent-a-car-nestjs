@@ -43,10 +43,9 @@ export class ReservationController {
     const user = await this.userService.getUser(body.user_id);
 
     const reservationBody = formToEntity(body, car, user);
-    // const reservation =
-    //   await this.reservationService.createReservation(reservationBody);
-    reservationBody.calculatePriceTotal();
-    console.log(reservationBody.totalPrice);
-    return;
+    const reservation =
+      await this.reservationService.createReservation(reservationBody);
+
+    return reservation;
   }
 }

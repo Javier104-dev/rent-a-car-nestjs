@@ -26,8 +26,10 @@ export class ReservationRepository {
     return reservation;
   }
 
-  async createReservation(body: Reservation): Promise<ReservationEntity> {
-    const createdReservation = this.reservationEntity.create(body);
+  async createReservation(
+    reservation: Reservation,
+  ): Promise<ReservationEntity> {
+    const createdReservation = this.reservationEntity.create(reservation);
     await this.reservationEntity.save(createdReservation);
     return createdReservation;
   }

@@ -11,11 +11,11 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  first_name: string;
+  @Column({ name: 'first_name' })
+  firstName: string;
 
-  @Column()
-  last_name: string;
+  @Column({ name: 'last_name' })
+  lastName: string;
 
   @Column()
   nationality: string;
@@ -23,8 +23,8 @@ export class UserEntity {
   @Column()
   address: string;
 
-  @Column()
-  phone_number: string;
+  @Column({ name: 'phone_number' })
+  phoneNumber: string;
 
   @Column()
   email: string;
@@ -32,9 +32,9 @@ export class UserEntity {
   @Column({ type: 'date' })
   birthdate: Date;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

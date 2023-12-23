@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CarEntity } from '../entity/car.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
@@ -45,7 +49,13 @@ export class CarRepository {
   }
 
   async deleteCar(id: number): Promise<DeleteResult> {
-    const car = await this.carEntity.delete(id);
-    return car;
+    try {
+      const car = await this.carEntity.delete(id);
+      return car;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `No se puede eliminar el auto con id: ${id} porque tiene reservas activas`,
+      );
+    }
   }
 }

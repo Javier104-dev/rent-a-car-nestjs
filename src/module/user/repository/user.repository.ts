@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { UserDto } from '../dto/user.dto';
@@ -44,7 +48,13 @@ export class UserRepository {
   }
 
   async deleteUser(id: number): Promise<DeleteResult> {
-    const car = await this.userEntity.delete(id);
-    return car;
+    try {
+      const user = await this.userEntity.delete(id);
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `No se puede eliminar el usuario con id: ${id} porque tiene reservas activas`,
+      );
+    }
   }
 }

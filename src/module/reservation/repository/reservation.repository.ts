@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ReservationEntity } from '../entity/reservation.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from '../model/entity/reservation';
 
@@ -23,6 +23,10 @@ export class ReservationRepository {
       where: { id },
       relations: ['car', 'user'],
     });
+
+    if (!reservation)
+      throw new NotFoundException(`No se encontraron reservas con id: ${id}`);
+
     return reservation;
   }
 
@@ -32,5 +36,26 @@ export class ReservationRepository {
     const createdReservation = this.reservationEntity.create(reservation);
     await this.reservationEntity.save(createdReservation);
     return createdReservation;
+  }
+
+  async updateReservation(
+    reservation: Reservation,
+  ): Promise<ReservationEntity> {
+    const newReservation = await this.reservationEntity.preload(reservation);
+
+    if (!newReservation)
+      throw new NotFoundException(
+        `No se encontraron reservas con id: ${reservation.id}`,
+      );
+
+    const updatedReservation =
+      await this.reservationEntity.save(newReservation);
+
+    return updatedReservation;
+  }
+
+  async deleteReservation(id: number): Promise<DeleteResult> {
+    const reservation = await this.reservationEntity.delete(id);
+    return reservation;
   }
 }

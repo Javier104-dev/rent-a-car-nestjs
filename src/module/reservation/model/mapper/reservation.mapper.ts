@@ -5,14 +5,16 @@ import { ReservationDto } from '../../dto/reservation.dto';
 
 export const formToEntity = (
   {
+    id,
     start_date: startDate,
     finish_date: finishDate,
     price_per_day: pricePerDay,
   }: ReservationDto,
   car: CarEntity,
   user: UserEntity,
-) =>
+): Reservation =>
   new Reservation(
+    id,
     new Date(startDate),
     new Date(finishDate),
     Number(pricePerDay),

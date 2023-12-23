@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ReservationRepository } from '../repository/reservation.repository';
 import { ReservationEntity } from '../entity/reservation.entity';
 import { Reservation } from '../model/entity/reservation';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class ReservationService {
@@ -20,5 +21,14 @@ export class ReservationService {
   ): Promise<ReservationEntity> {
     reservation.calculatePriceTotal();
     return this.reservationRepository.createReservation(reservation);
+  }
+
+  async updateReservation(reservation: Reservation) {
+    reservation.calculatePriceTotal();
+    return this.reservationRepository.updateReservation(reservation);
+  }
+
+  async deleteReservation(id: number): Promise<DeleteResult> {
+    return this.reservationRepository.deleteReservation(id);
   }
 }

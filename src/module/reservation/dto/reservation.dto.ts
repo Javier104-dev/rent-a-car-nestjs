@@ -6,6 +6,10 @@ import {
 } from 'class-validator';
 
 export class ReservationDto {
+  @IsNumber()
+  @IsOptional()
+  id: number;
+
   @IsNotEmpty()
   @IsDateString()
   start_date: Date;

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CarEntity } from '../entity/car.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CarDto } from '../dto/car.dto';
 import { UpdateCarDto } from '../dto/update.car.dto';
 
@@ -44,7 +44,7 @@ export class CarRepository {
     return updatedCar;
   }
 
-  async deleteCar(id: number) {
+  async deleteCar(id: number): Promise<DeleteResult> {
     const car = await this.carEntity.delete(id);
     return car;
   }

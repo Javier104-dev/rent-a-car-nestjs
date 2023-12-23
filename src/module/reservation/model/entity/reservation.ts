@@ -2,6 +2,7 @@ import { CarEntity } from 'src/module/car/entity/car.entity';
 import { UserEntity } from 'src/module/user/entity/user.entity';
 
 export class Reservation {
+  public id: number;
   public startDate: Date;
   public finishDate: Date;
   public pricePerDay: number;
@@ -10,12 +11,14 @@ export class Reservation {
   public user: UserEntity;
 
   constructor(
+    id: number,
     startDate: Date,
     finishDate: Date,
     pricePerDay: number,
     car: CarEntity,
     user: UserEntity,
   ) {
+    this.id = id;
     this.startDate = startDate;
     this.finishDate = finishDate;
     this.pricePerDay = pricePerDay;

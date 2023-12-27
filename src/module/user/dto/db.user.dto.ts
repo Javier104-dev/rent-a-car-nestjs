@@ -1,13 +1,44 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { UserDto } from './user.dto';
-import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
-import { Transform } from 'class-transformer';
+import {
+  IsDate,
+  IsDateString,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
-export class DbUserDto extends PartialType(UserDto) {
+export class DbUserDto {
   @IsNotEmpty()
-  @Transform(({ value }) => Number(value))
   @IsNumber()
   id: number;
+
+  @IsNotEmpty()
+  @IsString()
+  firstName: string;
+
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
+
+  @IsNotEmpty()
+  @IsString()
+  nationality: string;
+
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+
+  @IsNotEmpty()
+  @IsString()
+  phoneNumber: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  birthdate: Date;
 
   @IsNotEmpty()
   @IsDate()

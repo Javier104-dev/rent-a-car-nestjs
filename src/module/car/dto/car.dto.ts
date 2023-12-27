@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CarDto {
@@ -11,10 +12,12 @@ export class CarDto {
 
   @IsNumber()
   @IsNotEmpty()
+  @Transform(({ value }) => Number(value))
   year: number;
 
   @IsNumber()
   @IsNotEmpty()
+  @Transform(({ value }) => Number(value))
   kms: number;
 
   @IsString()
@@ -23,10 +26,12 @@ export class CarDto {
 
   @IsNumber()
   @IsNotEmpty()
+  @Transform(({ value }) => Number(value))
   passengers: number;
 
   @IsNumber()
   @IsOptional()
+  @Transform(({ value }) => parseFloat(value))
   price: number;
 
   @IsNumber()

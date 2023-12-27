@@ -1,39 +1,11 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { CarDto } from './car.dto';
+import { IsNotEmpty, IsNumber } from 'class-validator';
+import { Transform } from 'class-transformer';
 
-export class UpdateCarDto {
+export class UpdateCarDto extends PartialType(CarDto) {
   @IsNumber()
   @IsNotEmpty()
+  @Transform(({ value }) => Number(value))
   id: number;
-
-  @IsString()
-  @IsNotEmpty()
-  brand: string;
-
-  @IsString()
-  @IsNotEmpty()
-  model: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  year: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  kms: number;
-
-  @IsString()
-  @IsNotEmpty()
-  color: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  passengers: number;
-
-  @IsNumber()
-  @IsOptional()
-  price: number;
-
-  @IsNumber()
-  @IsOptional()
-  img: number;
 }

@@ -8,6 +8,8 @@ import { DeleteResult, Repository } from 'typeorm';
 import { UserDto } from '../dto/user.dto';
 import { UserEntity } from '../entity/user.entity';
 import { UpdateUserDto } from '../dto/update.user.dto';
+import { plainToInstance } from 'class-transformer';
+import { DbUserDto } from '../dto/db.user.dto';
 
 @Injectable()
 export class UserRepository {
@@ -16,18 +18,20 @@ export class UserRepository {
     private userEntity: Repository<UserEntity>,
   ) {}
 
-  async getUsers(): Promise<UserEntity[]> {
+  async getUsers(): Promise<DbUserDto[]> {
     const users = await this.userEntity.find();
-    return users;
+    const usersDto = plainToInstance(DbUserDto, users);
+    return usersDto;
   }
 
-  async getUser(id: number): Promise<UserEntity> {
+  async getUser(id: number): Promise<DbUserDto> {
     const user = await this.userEntity.findOne({ where: { id } });
 
     if (!user)
       throw new NotFoundException(`No se encontraron usuarios con id:${id}`);
 
-    return user;
+    const userDto = plainToInstance(DbUserDto, user);
+    return userDto;
   }
 
   async createUser(body: UserDto): Promise<UserEntity> {

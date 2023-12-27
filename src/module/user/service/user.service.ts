@@ -4,16 +4,17 @@ import { UserEntity } from '../entity/user.entity';
 import { UserDto } from '../dto/user.dto';
 import { UpdateUserDto } from '../dto/update.user.dto';
 import { DeleteResult } from 'typeorm';
+import { DbUserDto } from '../dto/db.user.dto';
 
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async getUsers(): Promise<UserEntity[]> {
+  async getUsers(): Promise<DbUserDto[]> {
     return this.userRepository.getUsers();
   }
 
-  async getUser(id: number): Promise<UserEntity> {
+  async getUser(id: number): Promise<DbUserDto> {
     return this.userRepository.getUser(id);
   }
 

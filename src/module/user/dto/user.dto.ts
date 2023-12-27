@@ -1,31 +1,31 @@
 import { IsDateString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class UserDto {
-  @IsString()
   @IsNotEmpty()
-  first_name: string;
+  @IsString()
+  firstName: string;
 
-  @IsString()
   @IsNotEmpty()
-  last_name: string;
+  @IsString()
+  lastName: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   nationality: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   address: string;
 
+  @IsNotEmpty()
   @IsString()
-  @IsNotEmpty()
-  phone_number: string;
+  phoneNumber: string;
 
-  @IsEmail()
   @IsNotEmpty()
+  @IsEmail()
   email: string;
 
-  @IsDateString()
   @IsNotEmpty()
+  @IsDateString()
   birthdate: Date;
 }

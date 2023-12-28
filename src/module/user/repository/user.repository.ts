@@ -54,14 +54,14 @@ export class UserRepository {
     return userDto;
   }
 
-  // async deleteUser(id: number): Promise<DeleteResult> {
-  //   try {
-  //     const user = await this.userEntity.delete(id);
-  //     return user;
-  //   } catch (error) {
-  //     throw new InternalServerErrorException(
-  //       `No se puede eliminar el usuario con id: ${id} porque tiene reservas activas`,
-  //     );
-  //   }
-  // }
+  async deleteUser(id: number): Promise<DeleteResult> {
+    try {
+      const user = await this.userEntity.delete(id);
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `No se puede eliminar el usuario con id: ${id} porque tiene reservas activas`,
+      );
+    }
+  }
 }

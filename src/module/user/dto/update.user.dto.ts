@@ -1,13 +1,20 @@
-import { Expose } from 'class-transformer';
-import { IsDateString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
-export class FormUserDto {
-  @Expose({ name: 'first_name' })
+export class UpdateUserDto {
+  @IsNotEmpty()
+  @IsNumber()
+  id: number;
+
   @IsNotEmpty()
   @IsString()
   firstName: string;
 
-  @Expose({ name: 'last_name' })
   @IsNotEmpty()
   @IsString()
   lastName: string;
@@ -20,7 +27,6 @@ export class FormUserDto {
   @IsString()
   address: string;
 
-  @Expose({ name: 'phone_number' })
   @IsNotEmpty()
   @IsString()
   phoneNumber: string;

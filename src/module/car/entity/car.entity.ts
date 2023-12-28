@@ -29,7 +29,7 @@ export class CarEntity {
   @Column()
   passengers: number;
 
-  @Column({ nullable: true, default: null, type: 'float' })
+  @Column({ nullable: true, type: 'float' })
   price: number;
 
   @Column({ nullable: true, default: null })

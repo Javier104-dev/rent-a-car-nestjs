@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repository/user.repository';
 import { UserEntity } from '../entity/user.entity';

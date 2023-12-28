@@ -1,40 +1,57 @@
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class CarDto {
-  @IsString()
+export class DbCarDto {
   @IsNotEmpty()
+  @IsNumber()
+  id: number;
+
+  @IsNotEmpty()
+  @IsString()
   brand: string;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   model: string;
 
-  @IsNumber()
   @IsNotEmpty()
   @Transform(({ value }) => Number(value))
+  @IsNumber()
   year: number;
 
-  @IsNumber()
   @IsNotEmpty()
   @Transform(({ value }) => Number(value))
+  @IsNumber()
   kms: number;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   color: string;
 
-  @IsNumber()
   @IsNotEmpty()
   @Transform(({ value }) => Number(value))
+  @IsNumber()
   passengers: number;
 
-  @IsNumber()
-  @IsOptional()
   @Transform(({ value }) => parseFloat(value))
+  @IsNumber()
   price: number;
 
   @IsNumber()
   @IsOptional()
   img: number;
+
+  @IsNotEmpty()
+  @IsDate()
+  createdAt: Date;
+
+  @IsNotEmpty()
+  @IsDate()
+  updatedAt: Date;
 }

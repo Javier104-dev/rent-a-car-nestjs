@@ -18,13 +18,13 @@ export class UserRepository {
     private userEntity: Repository<UserEntity>,
   ) {}
 
-  async getUsers(): Promise<UserEntity[]> {
+  async getUsers(): Promise<DbUserDto[]> {
     const users = await this.userEntity.find();
     const usersDto = plainToInstance(DbUserDto, users);
     return usersDto;
   }
 
-  async getUser(id: number): Promise<UserEntity> {
+  async getUser(id: number): Promise<DbUserDto> {
     const user = await this.userEntity.findOne({ where: { id } });
 
     if (!user)
@@ -34,14 +34,14 @@ export class UserRepository {
     return userDto;
   }
 
-  async createUser(body: NewUserDto): Promise<UserEntity> {
+  async createUser(body: NewUserDto): Promise<DbUserDto> {
     const user = this.userEntity.create(body);
     const createdUser = await this.userEntity.save(user);
     const userDto = plainToInstance(DbUserDto, createdUser);
     return userDto;
   }
 
-  async updateUser(body: UpdateUserDto): Promise<UserEntity> {
+  async updateUser(body: UpdateUserDto): Promise<DbUserDto> {
     const user = await this.userEntity.preload(body);
     if (!user)
       throw new NotFoundException(

@@ -9,7 +9,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { UserEntity } from '../entity/user.entity';
 import { DbUserDto } from '../dto/db.user.dto';
 import { NewUserDto } from '../dto/new.user.dto';
 import { UpdateUserDto } from '../dto/update.user.dto';
@@ -32,7 +31,7 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() body: NewUserDto): Promise<UserEntity> {
+  async createUser(@Body() body: NewUserDto): Promise<DbUserDto> {
     const createdUser = await this.userService.createUser(body);
     return createdUser;
   }
@@ -41,7 +40,7 @@ export class UserController {
   async updateUser(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: NewUserDto,
-  ): Promise<UserEntity> {
+  ): Promise<DbUserDto> {
     const userDto = plainToInstance(UpdateUserDto, { id, ...body });
     const updatedUser = await this.userService.updateUser(userDto);
     return updatedUser;

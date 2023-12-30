@@ -3,6 +3,8 @@ import { ReservationEntity } from '../entity/reservation.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from '../model/entity/reservation';
+import { DbReservationDto } from '../dto/db.Reservation.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class ReservationRepository {
@@ -11,14 +13,15 @@ export class ReservationRepository {
     private readonly reservationEntity: Repository<ReservationEntity>,
   ) {}
 
-  async getReservations(): Promise<ReservationEntity[]> {
+  async getReservations(): Promise<DbReservationDto[]> {
     const reservations = await this.reservationEntity.find({
       relations: ['car', 'user'],
     });
-    return reservations;
+    const reservationsDto = plainToInstance(DbReservationDto, reservations);
+    return reservationsDto;
   }
 
-  async getReservation(id: number): Promise<ReservationEntity> {
+  async getReservation(id: number): Promise<DbReservationDto> {
     const reservation = await this.reservationEntity.findOne({
       where: { id },
       relations: ['car', 'user'],
@@ -27,7 +30,8 @@ export class ReservationRepository {
     if (!reservation)
       throw new NotFoundException(`No se encontraron reservas con id: ${id}`);
 
-    return reservation;
+    const reservationDto = plainToInstance(DbReservationDto, reservation);
+    return reservationDto;
   }
 
   async createReservation(
@@ -38,24 +42,24 @@ export class ReservationRepository {
     return createdReservation;
   }
 
-  async updateReservation(
-    reservation: Reservation,
-  ): Promise<ReservationEntity> {
-    const newReservation = await this.reservationEntity.preload(reservation);
+  // async updateReservation(
+  //   reservation: Reservation,
+  // ): Promise<ReservationEntity> {
+  //   const newReservation = await this.reservationEntity.preload(reservation);
 
-    if (!newReservation)
-      throw new NotFoundException(
-        `No se encontraron reservas con id: ${reservation.id}`,
-      );
+  //   if (!newReservation)
+  //     throw new NotFoundException(
+  //       `No se encontraron reservas con id: ${reservation.id}`,
+  //     );
 
-    const updatedReservation =
-      await this.reservationEntity.save(newReservation);
+  //   const updatedReservation =
+  //     await this.reservationEntity.save(newReservation);
 
-    return updatedReservation;
-  }
+  //   return updatedReservation;
+  // }
 
-  async deleteReservation(id: number): Promise<DeleteResult> {
-    const reservation = await this.reservationEntity.delete(id);
-    return reservation;
-  }
+  // async deleteReservation(id: number): Promise<DeleteResult> {
+  //   const reservation = await this.reservationEntity.delete(id);
+  //   return reservation;
+  // }
 }

@@ -9,7 +9,7 @@ import { ReservationModule } from './module/reservation/reservation.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(configDb),
+    TypeOrmModule.forRootAsync(configDb),
     UserModule,
     CarModule,
     ReservationModule,

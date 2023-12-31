@@ -48,9 +48,8 @@ export class CarController {
 
   @Delete(':id')
   async deleteCar(@Param('id', ParseIntPipe) id: number): Promise<DbCarDto> {
-    const car = await this.carService.getCar(id);
+    const carDto = await this.carService.getCar(id);
     await this.carService.deleteCar(id);
-    const carDto = plainToInstance(DbCarDto, car);
     return carDto;
   }
 }

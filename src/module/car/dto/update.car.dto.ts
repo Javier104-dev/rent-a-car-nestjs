@@ -1,10 +1,9 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { NewCarDto } from './new.car.dto';
-import { IsNotEmpty } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class UpdateCarDto extends PartialType(NewCarDto) {
   @IsNotEmpty()
-  @Transform(({ value }) => Number(value))
+  @IsNumber()
   id: number;
 }

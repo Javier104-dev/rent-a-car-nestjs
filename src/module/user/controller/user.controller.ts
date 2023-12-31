@@ -48,9 +48,8 @@ export class UserController {
 
   @Delete(':id')
   async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<DbUserDto> {
-    const user = await this.userService.getUser(id);
+    const userDto = await this.userService.getUser(id);
     await this.userService.deleteUser(id);
-    const userDto = plainToInstance(DbUserDto, user);
     return userDto;
   }
 }

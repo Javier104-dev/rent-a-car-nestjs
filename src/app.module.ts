@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configDb } from './config/configDb';
 import { UserModule } from './module/user/user.module';
@@ -9,7 +9,13 @@ import { ReservationModule } from './module/reservation/reservation.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRootAsync(configDb),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return configDb(configService);
+      },
+    }),
     UserModule,
     CarModule,
     ReservationModule,

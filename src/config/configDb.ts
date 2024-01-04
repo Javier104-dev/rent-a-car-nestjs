@@ -1,13 +1,13 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CarEntity } from 'src/module/car/entity/car.entity';
 import { ReservationEntity } from 'src/module/reservation/entity/reservation.entity';
 import { UserEntity } from 'src/module/user/entity/user.entity';
 
-export const configDb: TypeOrmModuleAsyncOptions = {
-  imports: [ConfigModule],
-  inject: [ConfigService],
-  useFactory: async (configService: ConfigService) => ({
+export const configDb = (
+  configService: ConfigService,
+): TypeOrmModuleOptions => {
+  const typeOrmOptions: TypeOrmModuleOptions = {
     type: 'mysql',
     host: configService.get('DB_HOST'),
     port: configService.get('DB_PORT'),
@@ -16,7 +16,14 @@ export const configDb: TypeOrmModuleAsyncOptions = {
     database: configService.get('DB_NAME'),
     entities: [UserEntity, CarEntity, ReservationEntity],
     retryDelay: 3000,
-    logging: true,
-    // synchronize: true,
-  }),
+  };
+
+  if (configService.get('NODE_ENV') === 'production') return typeOrmOptions;
+
+  if (configService.get('NODE_ENV') === 'development')
+    return {
+      ...typeOrmOptions,
+      logging: true,
+      synchronize: true,
+    };
 };

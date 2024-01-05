@@ -8,29 +8,29 @@ import {
 
 export class newReservationDto {
   @IsNotEmpty()
-  @Expose({ name: 'start_date' })
+  @Expose({ name: 'start-date' })
   @IsDateString()
   startDate: Date;
 
   @IsNotEmpty()
-  @Expose({ name: 'finish_date' })
+  @Expose({ name: 'finish-date' })
   @IsDateString()
   finishDate: Date;
 
-  @Expose({ name: 'price_per_day', toPlainOnly: true })
+  @Expose({ name: 'price-per-day', toPlainOnly: true })
   @IsOptional()
   @Transform(({ value }) => parseFloat(value))
   @IsNumber()
   pricePerDay: number;
 
   @IsNotEmpty()
-  @Expose({ name: 'car_id' })
+  @Expose({ name: 'car-id' })
   @Transform(({ value }) => Number(value))
   @IsNumber()
   carId: number;
 
   @IsNotEmpty()
-  @Expose({ name: 'user_id' })
+  @Expose({ name: 'user-id' })
   @Transform(({ value }) => Number(value))
   @IsNumber()
   userId: number;

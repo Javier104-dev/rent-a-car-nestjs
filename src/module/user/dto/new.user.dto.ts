@@ -2,12 +2,12 @@ import { Expose } from 'class-transformer';
 import { IsDateString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class NewUserDto {
-  @Expose({ name: 'first_name' })
+  @Expose({ name: 'first-name' })
   @IsNotEmpty()
   @IsString()
   firstName: string;
 
-  @Expose({ name: 'last_name' })
+  @Expose({ name: 'last-name' })
   @IsNotEmpty()
   @IsString()
   lastName: string;
@@ -20,7 +20,7 @@ export class NewUserDto {
   @IsString()
   address: string;
 
-  @Expose({ name: 'phone_number' })
+  @Expose({ name: 'phone-number' })
   @IsNotEmpty()
   @IsString()
   phoneNumber: string;

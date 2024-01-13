@@ -196,7 +196,7 @@ En cada ejemplo se usará un módulo diferente, ya que todos tienen una estructu
   - **"userId"="1"**: *(tipo: integer. Id del cliente registrado)*
 
 **Response**
-  - Código **HTTP 200** Ok
+  - Código **HTTP 201** Ok
     ``` json
     {
       "id": 1,

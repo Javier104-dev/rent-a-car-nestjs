@@ -79,7 +79,7 @@ describe('CarController', () => {
         color: 'red',
         passengers: 4,
         price: 2000,
-        img: 0,
+        img: null,
       };
 
       const mockCreateCarDto: DbCarDto = {
@@ -123,18 +123,18 @@ describe('CarController', () => {
         ...newCar,
       };
 
-      const mockUpdateCarDto: DbCarDto = {
+      const mockUpdatedCarDto: DbCarDto = {
         id,
         ...newCar,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
 
-      jest.spyOn(carService, 'updateCar').mockResolvedValue(mockUpdateCarDto);
+      jest.spyOn(carService, 'updateCar').mockResolvedValue(mockUpdatedCarDto);
       const result = await carController.updateCar(id, newCar);
 
       expect(carService.updateCar).toHaveBeenCalledWith(updateCar);
-      expect(result).toEqual(mockUpdateCarDto);
+      expect(result).toEqual(mockUpdatedCarDto);
       expect(result.id).toEqual(id);
     });
   });

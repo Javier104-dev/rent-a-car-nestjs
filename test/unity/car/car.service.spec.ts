@@ -6,7 +6,7 @@ import { UpdateCarDto } from 'src/module/car/dto/update.car.dto';
 import { NewCarDto } from 'src/module/car/dto/new.car.dto';
 import { DeleteResult } from 'typeorm';
 
-describe('CarController', () => {
+describe('CarService', () => {
   let carService: CarService;
   let carRepository: CarRepository;
 

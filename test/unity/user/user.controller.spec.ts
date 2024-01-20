@@ -10,8 +10,8 @@ describe('UserController', () => {
   let userController: UserController;
   let userService: UserService;
 
-  const mockUsersDto: DbUserDto[] = [];
-  const mockUserDto: DbUserDto = {
+  const mockDbUsersDto: DbUserDto[] = [];
+  const mockDbUserDto: DbUserDto = {
     id: 10,
     firstName: 'Nombre',
     lastName: 'Apellido',
@@ -64,45 +64,45 @@ describe('UserController', () => {
   });
 
   describe('getUsers', () => {
-    it('Call the getUsers method of the UserService layer and return an array of DbUserDto entities', async () => {
-      jest.spyOn(userService, 'getUsers').mockResolvedValue(mockUsersDto);
+    it('Call the getUsers method of the userService layer and return an array of DbUserDto entities', async () => {
+      jest.spyOn(userService, 'getUsers').mockResolvedValue(mockDbUsersDto);
       const result = await userController.getUsers();
 
       expect(userService.getUsers).toHaveBeenCalled();
-      expect(result).toEqual(mockUsersDto);
+      expect(result).toEqual(mockDbUsersDto);
     });
   });
 
   describe('getUser', () => {
     it('Call the getUser method of the userService layer and return a DbUserDto entity', async () => {
       const id = 10;
-      jest.spyOn(userService, 'getUser').mockResolvedValue(mockUserDto);
+      jest.spyOn(userService, 'getUser').mockResolvedValue(mockDbUserDto);
       const result = await userController.getUser(id);
 
       expect(userService.getUser).toHaveBeenCalledWith(id);
-      expect(result).toEqual(mockUserDto);
+      expect(result).toEqual(mockDbUserDto);
       expect(result.id).toEqual(id);
     });
   });
 
   describe('createUser', () => {
     it('Call the createUser method of the userService layer and return a new DbUserDto entity', async () => {
-      jest.spyOn(userService, 'createUser').mockResolvedValue(mockUserDto);
+      jest.spyOn(userService, 'createUser').mockResolvedValue(mockDbUserDto);
       const result = await userController.createUser(mockNewUserDto);
 
       expect(userService.createUser).toHaveBeenCalledWith(mockNewUserDto);
-      expect(result).toEqual(mockUserDto);
+      expect(result).toEqual(mockDbUserDto);
     });
   });
 
   describe('updateUser', () => {
     it('Call the updateUser method of the userService layer and it should return an updated DbUserDto entity', async () => {
       const id = 10;
-      jest.spyOn(userService, 'updateUser').mockResolvedValue(mockUserDto);
+      jest.spyOn(userService, 'updateUser').mockResolvedValue(mockDbUserDto);
       const result = await userController.updateUser(id, mockNewUserDto);
 
       expect(userService.updateUser).toHaveBeenCalledWith(mockUpdateUserDto);
-      expect(result).toEqual(mockUserDto);
+      expect(result).toEqual(mockDbUserDto);
       expect(result.id).toEqual(id);
     });
   });
@@ -110,13 +110,13 @@ describe('UserController', () => {
   describe('deleteUser', () => {
     it('Call the deleteUser method of the userService layer and return the deleted Dto entity', async () => {
       const id = 10;
-      jest.spyOn(userService, 'getUser').mockResolvedValue(mockUserDto);
+      jest.spyOn(userService, 'getUser').mockResolvedValue(mockDbUserDto);
       jest.spyOn(userService, 'deleteUser').mockResolvedValue(mockDeleteResult);
       const result = await userController.deleteUser(id);
 
       expect(userService.getUser).toHaveBeenCalledWith(id);
       expect(userService.deleteUser).toHaveBeenCalledWith(id);
-      expect(result).toEqual(mockUserDto);
+      expect(result).toEqual(mockDbUserDto);
       expect(result.id).toEqual(id);
     });
   });

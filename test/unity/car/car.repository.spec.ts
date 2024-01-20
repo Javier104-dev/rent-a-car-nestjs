@@ -10,8 +10,8 @@ import { UpdateCarDto } from 'src/module/car/dto/update.car.dto';
 describe('CarRepository', () => {
   let carRepository: CarRepository;
 
-  const mockCarsDto: DbCarDto[] = [];
-  const mockCarDto: DbCarDto = {
+  const mockDbCarsDto: DbCarDto[] = [];
+  const mockDbCarDto: DbCarDto = {
     id: 5,
     brand: 'brand',
     model: 'model',
@@ -44,11 +44,11 @@ describe('CarRepository', () => {
   };
 
   const mockCarEntity = {
-    find: jest.fn().mockReturnValue(mockCarsDto),
-    findOne: jest.fn().mockReturnValue(mockCarDto),
+    find: jest.fn().mockReturnValue(mockDbCarsDto),
+    findOne: jest.fn().mockReturnValue(mockDbCarDto),
     create: jest.fn().mockReturnValue(mockNewCarDto),
     preload: jest.fn().mockReturnValue(mockUpdateCarDto),
-    save: jest.fn().mockReturnValue(mockCarDto),
+    save: jest.fn().mockReturnValue(mockDbCarDto),
     delete: jest.fn().mockReturnValue(mockDeleteResult),
   };
 
@@ -73,7 +73,7 @@ describe('CarRepository', () => {
       const result = await carRepository.getCars();
 
       expect(mockCarEntity.find).toHaveBeenCalled();
-      expect(result).toEqual(mockCarsDto);
+      expect(result).toEqual(mockDbCarsDto);
     });
   });
 
@@ -84,7 +84,7 @@ describe('CarRepository', () => {
       const result = await carRepository.getCar(id);
 
       expect(mockCarEntity.findOne).toHaveBeenCalledWith({ where: { id: 5 } });
-      expect(result).toEqual(mockCarDto);
+      expect(result).toEqual(mockDbCarDto);
       expect(result.id).toEqual(id);
     });
   });
@@ -97,7 +97,7 @@ describe('CarRepository', () => {
 
       expect(mockCarEntity.create).toHaveBeenCalledWith(mockNewCarDto);
       expect(mockCarEntity.save).toHaveBeenCalledWith(mockNewCarDto);
-      expect(result).toEqual(mockCarDto);
+      expect(result).toEqual(mockDbCarDto);
     });
   });
 
@@ -109,7 +109,7 @@ describe('CarRepository', () => {
 
       expect(mockCarEntity.preload).toHaveBeenCalledWith(mockUpdateCarDto);
       expect(mockCarEntity.save).toHaveBeenCalledWith(mockUpdateCarDto);
-      expect(result).toEqual(mockCarDto);
+      expect(result).toEqual(mockDbCarDto);
       expect(result.id).toEqual(mockUpdateCarDto.id);
     });
   });

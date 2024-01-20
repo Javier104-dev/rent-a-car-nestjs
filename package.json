@@ -62,7 +62,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "./test/unity/user",
+    "rootDir": "./test/unity",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

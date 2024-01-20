@@ -34,7 +34,7 @@ describe('CarController', () => {
   });
 
   describe('getCars', () => {
-    it('Call the getCars method of the CarService layer and return an array of DbCarDto entities', async () => {
+    it('Call the getCars method of the carService layer and return an array of DbCarDto entities', async () => {
       const mockCars: DbCarDto[] = [];
       jest.spyOn(carService, 'getCars').mockResolvedValue(mockCars);
       const result = await carController.getCars();
@@ -45,7 +45,7 @@ describe('CarController', () => {
   });
 
   describe('getCar', () => {
-    it('Call the getCar method of the CarService layer and return a DbCarDto entity', async () => {
+    it('Call the getCar method of the carService layer and return a DbCarDto entity', async () => {
       const id = 5;
       const mockGetCarDto: DbCarDto = {
         id: 5,
@@ -70,7 +70,7 @@ describe('CarController', () => {
   });
 
   describe('createCar', () => {
-    it('Call the createCar method of the CarService layer and return a new DbCarDto entity', async () => {
+    it('Call the createCar method of the carService layer and return a new DbCarDto entity', async () => {
       const newCar: NewCarDto = {
         brand: 'brand',
         model: 'model',
@@ -105,7 +105,7 @@ describe('CarController', () => {
   });
 
   describe('updateCar', () => {
-    it('Call the updateCar method of the CarService layer and it should return an updated DbCarDto entity', async () => {
+    it('Call the updateCar method of the carService layer and it should return an updated DbCarDto entity', async () => {
       const id = 10;
       const newCar: NewCarDto = {
         brand: 'brand2',
@@ -140,7 +140,7 @@ describe('CarController', () => {
   });
 
   describe('deleteCar', () => {
-    it('Call the deleteCar method of the CarService layer and return the deleted Dto entity', async () => {
+    it('Call the deleteCar method of the carService layer and return the deleted Dto entity', async () => {
       const id = 2554554;
       const mockDeleteCarDto: DbCarDto = {
         id: 2554554,

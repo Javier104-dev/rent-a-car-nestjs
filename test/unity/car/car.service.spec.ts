@@ -36,7 +36,7 @@ describe('CarService', () => {
   });
 
   describe('getCars', () => {
-    it('Call the getCars method of the CarRepository layer and return an array of DbCarDto entities', async () => {
+    it('Call the getCars method of the carRepository layer and return an array of DbCarDto entities', async () => {
       const mockCars: DbCarDto[] = [];
       jest.spyOn(carRepository, 'getCars').mockResolvedValue(mockCars);
       const result = await carService.getCars();
@@ -47,7 +47,7 @@ describe('CarService', () => {
   });
 
   describe('getCar', () => {
-    it('Call the getCar method of the CarRepository layer and return a DbCarDto entity', async () => {
+    it('Call the getCar method of the carRepository layer and return a DbCarDto entity', async () => {
       const id = 5;
       const mockGetCarDto: DbCarDto = {
         id: 5,
@@ -73,7 +73,7 @@ describe('CarService', () => {
   });
 
   describe('createCar', () => {
-    it('Call the createCar method of the CarRepository layer and return a new DbCarDto entity', async () => {
+    it('Call the createCar method of the carRepository layer and return a new DbCarDto entity', async () => {
       const newCar: NewCarDto = {
         brand: 'brand',
         model: 'model',
@@ -108,7 +108,7 @@ describe('CarService', () => {
   });
 
   describe('updateCar', () => {
-    it('Call the updateCar method of the CarRepository layer and it should return an updated DbCarDto entity', async () => {
+    it('Call the updateCar method of the carRepository layer and it should return an updated DbCarDto entity', async () => {
       const updateCar: UpdateCarDto = {
         id: 5,
         brand: 'brand2',
@@ -146,7 +146,7 @@ describe('CarService', () => {
   });
 
   describe('deleteCar', () => {
-    it('Call the deleteCar method of the CarRepository layer and return the deleted Dto entity', async () => {
+    it('Call the deleteCar method of the carRepository layer and return the deleted Dto entity', async () => {
       const id = 4454;
       const deleteResult: DeleteResult = {
         raw: undefined,

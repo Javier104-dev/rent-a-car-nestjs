@@ -47,8 +47,8 @@ describe('CarRepository', () => {
     find: jest.fn().mockReturnValue(mockDbCarsDto),
     findOne: jest.fn().mockReturnValue(mockDbCarDto),
     create: jest.fn().mockReturnValue(mockNewCarDto),
-    preload: jest.fn().mockReturnValue(mockUpdateCarDto),
     save: jest.fn().mockReturnValue(mockDbCarDto),
+    preload: jest.fn().mockReturnValue(mockUpdateCarDto),
     delete: jest.fn().mockReturnValue(mockDeleteResult),
   };
 

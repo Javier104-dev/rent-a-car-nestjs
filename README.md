@@ -95,6 +95,7 @@ Cada uno de ellos contiene la lógica para la creación de sus respectivas `enti
 
 | Ruta                      | Explicación                                                                                                                 |
 | :------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| test                      | Contiene los test de aplicación                                                                                             |
 | src                       | Contiene toda nuestra aplicación                                                                                            |
 | src/config/configDb.js    | Configura TypeOrm para su uso dependiendo de la variable de estado NODE_ENV                                                 |
 | src/module                | Contiene cada uno de los módulos de nuestra aplicación                                                                      |
@@ -279,7 +280,7 @@ En cada ejemplo se usará un módulo diferente, ya que todos tienen una estructu
 - Instalar las dependencias necesarias con el comando `npm install`.
 - En la raíz del proyecto crear un archivo `.env`, copiar las variables de entorno que se encuentran en el archivo `.env.dist` y reemplazar su valor siguiendo las indicaciones.
 - Correr el comando `npm start` para iniciar el servidor.
-- Correr el comando `npm run dev` si se desea modificar el código, este comando usa Nodemon para reiniciar el servidor cada vez que se detecta un cambio.
+- Correr el comando `npm run test` para iniciar los test unitarios de cada módulo.- Correr el comando `npm run dev` si se desea modificar el código, este comando usa Nodemon para reiniciar el servidor cada vez que se detecta un cambio.
 - Usar la URL base `http://127.0.0.1:8080` para interactuar con el servidor.
 
 ---

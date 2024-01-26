@@ -10,21 +10,13 @@ describe('ReservationController', () => {
   let carService: CarService;
   let userService: UserService;
 
+  const mockCarService = {
+    getCar: jest.fn(),
+  };
+  const MockUserService = {
+    getUser: jest.fn(),
+  };
   const mockReservationService = {
-    getReservations: jest.fn(),
-    getReservation: jest.fn(),
-    createReservation: jest.fn(),
-    updateReservation: jest.fn(),
-    deleteReservation: jest.fn(),
-  };
-  const asd = {
-    getReservations: jest.fn(),
-    getReservation: jest.fn(),
-    createReservation: jest.fn(),
-    updateReservation: jest.fn(),
-    deleteReservation: jest.fn(),
-  };
-  const asd2 = {
     getReservations: jest.fn(),
     getReservation: jest.fn(),
     createReservation: jest.fn(),
@@ -36,8 +28,8 @@ describe('ReservationController', () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
       controllers: [ReservationController],
       providers: [
-        { provide: CarService, useValue: asd },
-        { provide: UserService, useValue: asd2 },
+        { provide: CarService, useValue: mockCarService },
+        { provide: UserService, useValue: MockUserService },
         { provide: ReservationService, useValue: mockReservationService },
       ],
     }).compile();
@@ -45,6 +37,8 @@ describe('ReservationController', () => {
     reservationController = moduleRef.get<ReservationController>(
       ReservationController,
     );
+    carService = moduleRef.get<CarService>(CarService);
+    userService = moduleRef.get<UserService>(UserService);
     reservationService = moduleRef.get<ReservationService>(ReservationService);
   });
 

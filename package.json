@@ -62,7 +62,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "./test/unity/reservation",
+    "rootDir": "./src/module/reservation",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

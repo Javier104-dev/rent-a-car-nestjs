@@ -49,7 +49,7 @@ export class CarRepository {
         `No se encontraron autos con el id: ${body.id}`,
       );
 
-    const updatedCar = await this.carEntity.save(body);
+    const updatedCar = await this.carEntity.save(car);
     const carDto = plainToInstance(DbCarDto, updatedCar);
     return carDto;
   }
